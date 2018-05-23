@@ -12,8 +12,9 @@
     "category" : "programming",
     "changelog" : "https://github.com/guirem/plugin-autologin/blob/develop/docs/fr_FR/changelog.md",
     "documentation" : "https://github.com/guirem/plugin-autologin/blob/develop/docs/fr_FR/index.md",
+	"forum_link" : "https://www.jeedom.com/forum/viewtopic.php?f=135&t=37564",
 	"link" : {
-		"forum":"",
+		"forum":"https://www.jeedom.com/forum/viewtopic.php?f=135&t=37564",
 		"video" : ""
 	},
 	"languages" : ["fr_FR","en_US"],
