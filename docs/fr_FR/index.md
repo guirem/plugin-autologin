@@ -11,17 +11,22 @@ Plugin pour se connecter automatiquement à Jeedom avec un utilisateur choisi re
 
 **Fonctionnement :**
 
-Une page spécifique devra être appelé et gérera l'authentification automatique et redirection sur l'URL Jeedom selectionnée.
+Une page spécifique devra être appelé par le navigateur et gérera l'authentification automatique puis redirigera sur l'URL Jeedom renseignée.
+
+> **Note**    
+> L'utilisateur du plugin prend la responsabilité de fournir un accès à Jeedom de manière simplifié (sans mot de passe)
+
 
 Dashboard
 =======================
 
-Pas de panneau disponible sur le dashbaoard
+Pas de panneau disponible sur le dashboard
 
 Configuration du plugin
 =======================
 
 Activer seulement le plugin.
+
 
 Configuration des équipements
 =============================
