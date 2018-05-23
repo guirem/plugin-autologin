@@ -17,7 +17,7 @@
         "eg: 192.168.X.Y": "eg: 192.168.X.Y",
         "Utilisateur": "Utilisateur",
         "Selectionner un utilisateur (non admin)": "Selectionner un utilisateur (non admin)",
-        "Redirect URL": "Redirect URL",
+        "URL Jeedom": "URL Jeedom",
         "URL à appeler": "URL à appeler"
     }
 }

@@ -1,4 +1,4 @@
-Plugin Autologin (autologin)
+Plugin AutoLogin (autologin)
 =============================
 
 ![Logo plugin](../images/logoplugin.png "Logo plugin")
@@ -35,11 +35,11 @@ La configuration des sessions Autologin est accessible à partir du menu *Plugin
 
 ![Configuration](../images/configuration.png "Configuration")
 
-Listes des paramêtres :
+Liste des paramêtres :
 
-- IP autorisées : L'IP à partir duquel l'équipement devra se connecter
-- Utilisatuer : Choisir un utilisateur non admin (il est nécessaire d'avoir créer un utilisateur non admin au préalable)
-- Redirect URL : La page Jeedom de redirection une fois l'autologin effectué
+- IP autorisée : L'IP à partir duquel l'équipement devra se connecter
+- Utilisateur : Choisir un utilisateur non admin (il est nécessaire d'avoir créé un utilisateur non admin au préalable)
+- URL Jeedom : La page Jeedom de redirection une fois l'autologin effectué
 
 
 URL à appeler : Le lien à appeler qui gérera l'authentification et redirigera sur la page Jeedom choisie après 2 secondes.
