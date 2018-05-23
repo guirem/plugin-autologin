@@ -1,0 +1,23 @@
+{
+    "plugins\/autologin\/desktop\/php\/autologin.php": {
+        "Ajouter": "Add",
+        "Rechercher": "Search",
+        "Gestion": "Manage",
+        "Mes sessions AutoLogin": "My Autologin sessions",
+        "Sauvegarder": "Save",
+        "Supprimer": "Delete",
+        "Session": "Session",
+        "Nom de l'équipement": "Equipment name",
+        "Objet parent": "Parent Object",
+        "Aucun": "None",
+        "Catégorie": "Category",
+        "Activer": "Enable",
+        "Visible": "Visible",
+        "IP Autorisée": "Allowed IP",
+        "eg: 192.168.X.Y": "eg: 192.168.X.Y",
+        "Utilisateur": "User",
+        "Selectionner un utilisateur (non admin)": "Select a non-admin user",
+        "Redirect URL": "Redirect URL",
+        "URL à appeler": "URL to be called"
+    }
+}

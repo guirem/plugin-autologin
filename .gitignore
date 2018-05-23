@@ -1,0 +1,6 @@
+.project
+.DS_Store
+Thumbs.db
+*.php~
+__pycache__
+*.bak
