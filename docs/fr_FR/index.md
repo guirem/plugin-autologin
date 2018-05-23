@@ -6,12 +6,12 @@ Plugin AutoLogin (autologin)
 Plugin pour se connecter automatiquement à Jeedom avec un utilisateur choisi restreint à une IP.
 
 **Cas d'utilisation :**
-- Ecran déporté (tablette)
+- Ecrans déportés (tablettes)
 - Difffusion Jeedom sur GoogleCast (voir plugin googlecast)
 
 **Fonctionnement :**
 
-Une page spécifique devra être appelé par le navigateur et gérera l'authentification automatique puis redirigera sur l'URL Jeedom renseignée.
+Une page spécifique devra être appelé par le navigateur et gérera l'authentification automatique puis redirigera sur l'URL Jeedom.
 
 > **Note**    
 > L'utilisateur du plugin prend la responsabilité de fournir un accès à Jeedom de manière simplifié (sans mot de passe)
@@ -31,7 +31,7 @@ Activer seulement le plugin.
 Configuration des équipements
 =============================
 
-La configuration des sessions Autologin est accessible à partir du menu *Plugins > Programmation > Autologin*.
+La configuration des sessions Autologin est accessible à partir du menu *Plugins > Programmation > AutoLogin*.
 
 ![Configuration](../images/configuration.png "Configuration")
 
@@ -49,10 +49,10 @@ URL à appeler : Le lien à appeler qui gérera l'authentification et redirigera
 
 > **Example**
 >
-> Utiliser le lien fournit par le plugin dans le navigateur :
+> Utiliser le lien fournit par le plugin dans le navigateur de l'équipement ayant la même IP que celle renseignée :
 ``https://myjeedom/plugins/autologin/core/php/go.php?apikey=mypluginapikey&id=187``
 >
-> Après 2 secondes, la page Jeedom selectionnée va se charger.
+> Après 2 secondes, le lien de la page Jeedom renseignée va se charger.
 
 FAQ
 =============================
