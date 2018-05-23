@@ -66,6 +66,18 @@ class autologin extends eqLogic {
         $this->deleteHash();
 	}
 
+	public function preSave() {
+        // first time only
+        if ($this->getLogicalId()=='') {
+    		if ( $this->getConfiguration('redirecturl', '') == '' ) {
+                $this->setConfiguration('redirecturl', network::getNetworkAccess('external'));
+            }
+            if ( $this->getConfiguration('ip', '') == '' ) {
+                $this->setConfiguration('ip', getClientIp());
+            }
+            $this->setIsEnable(1);
+        }
+	}
 
 	public function postSave() {
 	}
