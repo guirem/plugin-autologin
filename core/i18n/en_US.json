@@ -18,6 +18,8 @@
         "Utilisateur": "User",
         "Selectionner un utilisateur (non admin)": "Select a non-admin user",
         "URL Jeedom": "Jeedom URL",
-        "URL à appeler": "URL to be called"
+        "URL à appeler": "URL to be called",
+        "Pour un accès interne": "For internal access",
+        "Pour un accès externe": "For external access"
     }
 }

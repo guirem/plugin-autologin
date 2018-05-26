@@ -32,7 +32,7 @@ class autologin extends eqLogic {
 	public function preUpdate() {
 
         if ( $this->getConfiguration('redirecturl', '') == '' ) {
-            $this->setConfiguration('redirecturl', network::getNetworkAccess('external'));
+            $this->setConfiguration('redirecturl', network::getNetworkAccess('internal'));
         }
         if ( !filter_var($this->getConfiguration('redirecturl', ''), FILTER_VALIDATE_URL) ) {
             throw new Exception(__('Le champs Redirect URL n\'est pas au bon format.', __FILE__));
@@ -70,7 +70,7 @@ class autologin extends eqLogic {
         // first time only
         if ($this->getLogicalId()=='') {
     		if ( $this->getConfiguration('redirecturl', '') == '' ) {
-                $this->setConfiguration('redirecturl', network::getNetworkAccess('external'));
+                $this->setConfiguration('redirecturl', network::getNetworkAccess('internal'));
             }
             if ( $this->getConfiguration('ip', '') == '' ) {
                 $this->setConfiguration('ip', getClientIp());
