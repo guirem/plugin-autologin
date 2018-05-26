@@ -127,9 +127,9 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">{{URL Jeedom}}</label>
+            <label class="col-lg-3 control-label">{{Page Jeedom}}</label>
             <div class="col-lg-4">
-                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="redirecturl" placeholder="<?php echo 'eg : '.network::getNetworkAccess('internal') ?>"/>
+                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="redirecturl" placeholder="eg : index.php"/>
             </div>
         </div>
         <div class="form-group">

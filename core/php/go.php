@@ -39,8 +39,12 @@ if (isset($queryparam['id'])) {
         die();
     }
 
+    $scheme = 'http://';
+    if ( isset($_SERVER['HTTPS']) && 'on' === $_SERVER['HTTPS']) {
+        $scheme = 'https://';
+    }
+    $url = $scheme . $_SERVER['HTTP_HOST'] . '/' .$autologin->getRedirectUrl();
     $allowedIP = $autologin->getIP();
-    $url = $autologin->getRedirectUrl();
     $user = $autologin->getUser();
     $hashRegisteredDevice = $autologin->getHash();
     $hashregisterdevice = $autologin->getHash();

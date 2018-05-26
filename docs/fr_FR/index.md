@@ -39,10 +39,12 @@ Liste des paramêtres :
 
 - IP autorisée : L'IP à partir duquel l'équipement devra se connecter
 - Utilisateur : Choisir un utilisateur non admin (il est nécessaire d'avoir créé un utilisateur non admin au préalable)
-- URL Jeedom : La page Jeedom de redirection une fois l'autologin effectué
+- Page Jeedom : La page Jeedom de redirection une fois l'autologin effectué (sans le *http[s]://jeedom/*).    
+Exemple : "*index.php*" ou "*index.php?v=d&p=plan&plan_id=1*"
 
 
 URL à appeler : Le lien à appeler qui gérera l'authentification et redirigera sur la page Jeedom choisie après 2 secondes.
+Selon le besoin utiliser l'url interne ou externe.
 
 ![Screenshot](../images/loginscreenshot.png "Screenshot")
 

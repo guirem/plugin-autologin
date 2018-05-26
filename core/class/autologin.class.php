@@ -32,9 +32,15 @@ class autologin extends eqLogic {
 	public function preUpdate() {
 
         if ( $this->getConfiguration('redirecturl', '') == '' ) {
-            $this->setConfiguration('redirecturl', network::getNetworkAccess('internal'));
+            $this->setConfiguration('redirecturl', 'index.php');
         }
-        if ( !filter_var($this->getConfiguration('redirecturl', ''), FILTER_VALIDATE_URL) ) {
+        else {
+            $urlparts = parse_url($this->getConfiguration('redirecturl'));
+            $cleanurl = (substr($urlparts[path],0,1)=='/' ? substr($urlparts[path],1) : $urlparts[path]) . ($urlparts[query] ? '?'.$urlparts[query] : '');
+            $cleanurl = str_replace('//', '/', $cleanurl);
+            $this->setConfiguration('redirecturl', $cleanurl );
+        }
+        if ( !filter_var('http://127.0.0.1/'.$this->getConfiguration('redirecturl', ''), FILTER_VALIDATE_URL) ) {
             throw new Exception(__('Le champs Redirect URL n\'est pas au bon format.', __FILE__));
         }
         if ( $this->getConfiguration('ip', '') == '' ) {
@@ -70,7 +76,7 @@ class autologin extends eqLogic {
         // first time only
         if ($this->getLogicalId()=='') {
     		if ( $this->getConfiguration('redirecturl', '') == '' ) {
-                $this->setConfiguration('redirecturl', network::getNetworkAccess('internal'));
+                $this->setConfiguration('redirecturl', 'index.php');
             }
             if ( $this->getConfiguration('ip', '') == '' ) {
                 $this->setConfiguration('ip', getClientIp());
