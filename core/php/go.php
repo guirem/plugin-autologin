@@ -17,21 +17,19 @@
  */
 require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 
-if (!jeedom::apiAccess(init('apikey'), 'autologin')) {
+$querystr = parse_url(urldecode($_SERVER["REQUEST_URI"]));
+parse_str($querystr['query'], $queryparam);
+
+if (!isset($queryparam['apikey']) && !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
     echo getErrorHTML('Clef API non valide, vous n\'etes pas autorisé à effectuer cette action');
 	die();
 }
 
-if (init('test') != '') {
-	echo 'OK';
-	die();
-}
-
-if (init('id')) {
+if (isset($queryparam['id'])) {
 
     $ip = getClientIp();
 
-    $autologin = autologin::byLogicalId(init('id'), 'autologin');
+    $autologin = autologin::byLogicalId($queryparam['id'], 'autologin');
 	if (!is_object($autologin)) {
         echo getErrorHTML("ID does not exist");
         die();

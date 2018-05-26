@@ -129,13 +129,16 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
         <div class="form-group">
             <label class="col-lg-3 control-label">{{URL Jeedom}}</label>
             <div class="col-lg-4">
-                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="redirecturl" placeholder="<?php echo 'eg : '.network::getNetworkAccess('external') ?>"/>
+                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="redirecturl" placeholder="<?php echo 'eg : '.network::getNetworkAccess('internal') ?>"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-3 control-label">{{URL à appeler}}</label>
             <div class="alert alert-info col-lg-6">
-                <span><?php echo network::getNetworkAccess('external') . '/plugins/autologin/core/php/go.php?apikey=' . jeedom::getApiKey('autologin') . '&id=<span class="eqLogicAttr" data-l1key="configuration" data-l2key="urlid"/>';?></span>
+                <span><b>{{Pour un accès interne}}</b><br>
+                    <?php echo network::getNetworkAccess('internal') . '/plugins/autologin/core/php/go.php?apikey%3D' . jeedom::getApiKey('autologin') . '&id%3D<span class="eqLogicAttr" data-l1key="configuration" data-l2key="urlid"/>';?></span>
+                <span><br><br><b>{{Pour un accès externe}}</b><br>
+					<?php echo network::getNetworkAccess('external') . '/plugins/autologin/core/php/go.php?apikey%3D' . jeedom::getApiKey('autologin') . '&id%3D<span class="eqLogicAttr" data-l1key="configuration" data-l2key="urlid"/>';?></span>
             </div>
 	   </div>
     </fieldset>
