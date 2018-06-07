@@ -54,7 +54,13 @@ Selon le besoin utiliser l'url interne ou externe.
 > Utiliser le lien fournit par le plugin dans le navigateur de l'équipement ayant la même IP que celle renseignée :
 ``https://myjeedom/plugins/autologin/core/php/go.php?apikey=mypluginapikey&id=187``
 >
-> Après 2 secondes, le lien de la page Jeedom renseignée va se charger.
+> Si le navigateur n'est pas déjà authentifié avec l'utilisateur choisi, le lien de la page Jeedom renseignée va se charger après 2 secondes. Dans le cas contraire, la page sera redirigée directement.
+
+> **Note**
+>
+> Pour forcer la ré-authentification, il est possible d'ajouter l'option *&force* à la fin de l'URL
+``https://myjeedom/plugins/autologin/core/php/go.php?apikey=mypluginapikey&id=187&force``
+>
 
 FAQ
 =============================

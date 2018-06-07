@@ -19,7 +19,11 @@
         "Selectionner un utilisateur (non admin)": "Selectionner un utilisateur (non admin)",
         "Page Jeedom": "Page Jeedom",
         "URL à appeler": "URL à appeler",
-        "Pour un accès interne": "Pour un accès interne",
-        "Pour un accès externe": "Pour un accès externe"
+        "Accès interne": "Accès interne",
+        "Accès externe": "Accès externe"
+    },
+    "plugins\/autologin\/core\/php\/go.php": {
+        "Authentification en cours...": "Authentification en cours...",
+        "Connexion de l\'utilisateur ": "Connexion de l\'utilisateur "
     }
 }

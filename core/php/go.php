@@ -15,13 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
+
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
 require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 
 $querystr = parse_url(urldecode($_SERVER["REQUEST_URI"]));
 parse_str($querystr['query'], $queryparam);
 
 if (!isset($queryparam['apikey']) && !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
-    echo getErrorHTML('Clef API non valide, vous n\'etes pas autorisé à effectuer cette action');
+    echo getErrorHTML('API key is not valid. You are not allowed to access this page.');
 	die();
 }
 
@@ -86,28 +89,35 @@ if (isset($queryparam['id'])) {
         $sessions[session_id()]['datetime'] = date('Y-m-d H:i:s');
 	    $sessions[session_id()]['ip'] = getClientIp();
         cache::set('current_sessions', $sessions);
-        $user->setOptions('lastConnection', date('Y-m-d H:i:s'));
-        $user->save();
     }
-    log::add('autologin', 'info', __('Connexion de l\'utilisateur ', __FILE__) . $user->getLogin() . " ($ip)");
-
-    $registerDevice[sha512($rdk)]['datetime'] = date('Y-m-d H:i:s');
-    $user->setOptions('registerDevice', $registerDevice);
+    $user->setOptions('lastConnection', date('Y-m-d H:i:s'));
     $user->save();
 
-    @session_start();
-    $_SESSION['user'] = $user;
-    $_SESSION['jeedom_token'] = ajax::getToken();
-    $_SESSION['alreadyRegister'] = 1;
-    @session_write_close();
+    log::add('autologin', 'info', __('Connexion de l\'utilisateur ', __FILE__) . $user->getLogin() . " ($ip)");
 
-    $cookieTimeout = time() + 365 * 24 * 3600;
-    header("refresh: 2; url=$url");
-    setcookie('sess_id', $sessionid, $cookieTimeout, "/", '', false, true);
-	setcookie('registerDevice', $hashRegisteredDevice, $cookieTimeout, "/", '', false, true);
-    setcookie('jeedom_token', ajax::getToken(), $cookieTimeout, "/", '', false, true);
+    // if session already ok
+    if ( isset($_COOKIE['sess_id'])==$sessionid && isset($_COOKIE['registerDevice'])==$hashRegisteredDevice && !isset($queryparam['force']) ) {
+        header("Location: $url");
+    }
+    else {  // else generate session and cookies
+        $registerDevice[sha512($rdk)]['datetime'] = date('Y-m-d H:i:s');
+        $user->setOptions('registerDevice', $registerDevice);
+        $user->save();
 
-    echo getHTML();
+        @session_start();
+        $_SESSION['user'] = $user;
+        $_SESSION['jeedom_token'] = ajax::getToken();
+        $_SESSION['alreadyRegister'] = 1;
+        @session_write_close();
+
+        $cookieTimeout = time() + 365 * 24 * 3600;
+        header("refresh: 2; url=$url");
+        setcookie('sess_id', $sessionid, $cookieTimeout, "/", '', false, true);
+    	setcookie('registerDevice', $hashRegisteredDevice, $cookieTimeout, "/", '', false, true);
+        setcookie('jeedom_token', ajax::getToken(), $cookieTimeout, "/", '', false, true);
+
+        echo getHTML();
+    }
     die();
 }
 else {
@@ -137,7 +147,7 @@ function getHTML() {
     //$html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 24px;">Autologin</span><br><br>';
     $html .= '<img src="/plugins/autologin/desktop/images/thumb.png" width="80"><br><br><br>';
     $html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-size: 20px;">';
-    $html .= "Processing, please wait...";
+    $html .= __('Authentification en cours...', __FILE__);
     $html .= '</span>';
     $html .= '</center><br>';
     return $html;
