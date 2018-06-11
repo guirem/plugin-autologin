@@ -62,6 +62,15 @@ Selon le besoin utiliser l'url interne ou externe.
 ``https://myjeedom/plugins/autologin/core/php/go.php?apikey=mypluginapikey&id=187&force``
 >
 
+Sécurité
+=======================
+
+Il est vivement recommandé de créer un utilisateur dédié pour une utilisation sans login.
+
+Pour une utilisation en local, il est également recommandé d'activer l'option 'Local' pour cet utilisateur.
+
+En cas de faille, il est possible de désactiver l'utilisateur et/ou régénerer une clé API pour le plugin.
+
 FAQ
 =============================
 
