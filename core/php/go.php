@@ -34,11 +34,11 @@ if (isset($queryparam['id'])) {
 
     $autologin = autologin::byLogicalId($queryparam['id'], 'autologin');
 	if (!is_object($autologin)) {
-        echo getErrorHTML("ID does not exist");
+        echo getErrorHTML("ID does not exist.");
         die();
     }
     if ($autologin->getIsEnable() == 0) {
-        echo getErrorHTML("Autologin session is disabled");
+        echo getErrorHTML("Autologin session is disabled.");
         die();
     }
 
@@ -54,16 +54,16 @@ if (isset($queryparam['id'])) {
     $sessionid = $autologin->getSessionId();
 
     if ($allowedIP != $ip) {
-        echo getErrorHTML("IP $ip not allowed (allowed IP is $allowedIP)! ");
+        echo getErrorHTML("IP is not allowed.");
         die();
     }
 
     if (!is_object($user)) {
-        echo getErrorHTML("User does not exist or is disabled");
+        echo getErrorHTML("User does not exist or is disabled.");
         die();
     }
     if ($user->getOptions('localOnly', 0) == 1 && network::getUserLocation() != 'internal') {
-        echo getErrorHTML("User is configured to accept only local connection");
+        echo getErrorHTML("User accept only local connection.");
         die();
     }
 
