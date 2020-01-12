@@ -128,7 +128,7 @@ else {
 function getErrorHTML($error) {
     $html  = '';
     $html .= '<br><br><br><center>';
-    $html .= '<img src="../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
+    $html .= '<img src="../../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
     $html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 25px;">Autologin</span><br><br>';
     $html .= '<img src="../../desktop/images/thumb.png" width="80"><br><br><br>';
     $html .= '<span style="color: red;font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 20px;">';
@@ -143,7 +143,7 @@ function getErrorHTML($error) {
 function getHTML() {
     $html  = '';
     $html .= '<br><br><br><center>';
-    $html .= '<img src="../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
+    $html .= '<img src="../../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
     //$html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 24px;">Autologin</span><br><br>';
     $html .= '<img src="../../desktop/images/thumb.png" width="80"><br><br><br>';
     $html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-size: 20px;">';
