@@ -23,7 +23,7 @@ require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 $querystr = parse_url(urldecode($_SERVER["REQUEST_URI"]));
 parse_str($querystr['query'], $queryparam);
 
-if (!isset($queryparam['apikey']) && !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
+if (!isset($queryparam['apikey']) || !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
     echo getErrorHTML('API key is not valid. You are not allowed to access this page.');
 	die();
 }
