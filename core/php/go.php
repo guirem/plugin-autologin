@@ -23,7 +23,7 @@ require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 $querystr = parse_url(urldecode($_SERVER["REQUEST_URI"]));
 parse_str($querystr['query'], $queryparam);
 
-if (!isset($queryparam['apikey']) && !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
+if (!isset($queryparam['apikey']) || !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
     echo getErrorHTML('API key is not valid. You are not allowed to access this page.');
 	die();
 }
@@ -128,9 +128,9 @@ else {
 function getErrorHTML($error) {
     $html  = '';
     $html .= '<br><br><br><center>';
-    $html .= '<img src="/core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
+    $html .= '<img src="../../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
     $html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 25px;">Autologin</span><br><br>';
-    $html .= '<img src="/plugins/autologin/desktop/images/thumb.png" width="80"><br><br><br>';
+    $html .= '<img src="../../desktop/images/thumb.png" width="80"><br><br><br>';
     $html .= '<span style="color: red;font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 20px;">';
     $html .= $error;
     $html .= '</span><br><br>';
@@ -143,9 +143,9 @@ function getErrorHTML($error) {
 function getHTML() {
     $html  = '';
     $html .= '<br><br><br><center>';
-    $html .= '<img src="/core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
+    $html .= '<img src="../../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
     //$html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-weight: bold;font-size: 24px;">Autologin</span><br><br>';
-    $html .= '<img src="/plugins/autologin/desktop/images/thumb.png" width="80"><br><br><br>';
+    $html .= '<img src="../../desktop/images/thumb.png" width="80"><br><br><br>';
     $html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-size: 20px;">';
     $html .= __('Authentification en cours...', __FILE__);
     $html .= '</span>';
