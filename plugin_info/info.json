@@ -7,7 +7,7 @@
 	"hasOwnDeamon" : false,
 	"hasDependency" : false,
 	"maxDependancyInstallTime" : 0,
-	"version" : "1.0",
+	"version" : "1.1",
 	"require" : "3.0",
     "category" : "programming",
     "changelog" : "https://github.com/guirem/plugin-autologin/blob/develop/docs/fr_FR/changelog.md",
