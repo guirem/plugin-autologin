@@ -1,5 +1,4 @@
 <?php
-
 /* This file is part of Jeedom.
  *
  * Jeedom is free software: you can redistribute it and/or modify
@@ -25,25 +24,26 @@ parse_str($querystr['query'], $queryparam);
 
 if (!isset($queryparam['apikey']) || !jeedom::apiAccess($queryparam['apikey'], 'autologin')) {
     echo getErrorHTML('API key is not valid. You are not allowed to access this page.');
-	die();
+    die();
 }
 
 if (isset($queryparam['id'])) {
-
     $ip = getClientIp();
 
     $autologin = autologin::byLogicalId($queryparam['id'], 'autologin');
-	if (!is_object($autologin)) {
+    if (!is_object($autologin)) {
         echo getErrorHTML("ID does not exist.");
+        log::add('autologin', 'error', __('ID does not exist or is truncated. ', __FILE__) . '(id received: ' . $queryparam['id'] . ')');
         die();
     }
     if ($autologin->getIsEnable() == 0) {
         echo getErrorHTML("Autologin session is disabled.");
+        log::add('autologin', 'error', __('This autologin session has been disabled.', __FILE__));
         die();
     }
 
     $scheme = 'http://';
-    if ( isset($_SERVER['HTTPS']) && 'on' === $_SERVER['HTTPS']) {
+    if (isset($_SERVER['HTTPS']) && 'on' === $_SERVER['HTTPS']) {
         $scheme = 'https://';
     }
     $url = $scheme . $_SERVER['HTTP_HOST'] . '/' .$autologin->getRedirectUrl();
@@ -55,15 +55,18 @@ if (isset($queryparam['id'])) {
 
     if ($allowedIP != $ip) {
         echo getErrorHTML("IP is not allowed.");
+        log::add('autologin', 'error', __('This IP is not allowed ', __FILE__) . '(authorized: ' . $allowedIP . ' => device ip: ' . $ip . ')');
         die();
     }
 
     if (!is_object($user)) {
         echo getErrorHTML("User does not exist or is disabled.");
+        log::add('autologin', 'error', __('User does not exist or is disabled.', __FILE__));
         die();
     }
     if ($user->getOptions('localOnly', 0) == 1 && network::getUserLocation() != 'internal') {
         echo getErrorHTML("User accept only local connection.");
+        log::add('autologin', 'error', __('User accept only local connection.', __FILE__));
         die();
     }
 
@@ -71,9 +74,9 @@ if (isset($queryparam['id'])) {
     $rdk = $key[1];
 
     $registerDevice = $user->getOptions('registerDevice', array());
-	if (!is_array($registerDevice)) {
-		$registerDevice = array();
-	}
+    if (!is_array($registerDevice)) {
+        $registerDevice = array();
+    }
     if (!isset($registerDevice[sha512($rdk)])) {
         $autologin->saveHash();
         $registerDevice = $user->getOptions('registerDevice', array());
@@ -87,7 +90,7 @@ if (isset($queryparam['id'])) {
         $sessions[session_id()]['login'] = $user->getLogin();
         $sessions[session_id()]['user_id'] = $user->getId();
         $sessions[session_id()]['datetime'] = date('Y-m-d H:i:s');
-	    $sessions[session_id()]['ip'] = getClientIp();
+        $sessions[session_id()]['ip'] = $ip;
         cache::set('current_sessions', $sessions);
     }
     $user->setOptions('lastConnection', date('Y-m-d H:i:s'));
@@ -96,10 +99,9 @@ if (isset($queryparam['id'])) {
     log::add('autologin', 'info', __('Connexion de l\'utilisateur ', __FILE__) . $user->getLogin() . " ($ip)");
 
     // if session already ok
-    if ( isset($_COOKIE['sess_id'])==$sessionid && isset($_COOKIE['registerDevice'])==$hashRegisteredDevice && !isset($queryparam['force']) ) {
+    if (isset($_COOKIE['sess_id'])==$sessionid && isset($_COOKIE['registerDevice'])==$hashRegisteredDevice && !isset($queryparam['force'])) {
         header("Location: $url");
-    }
-    else {  // else generate session and cookies
+    } else {  // else generate session and cookies
         $registerDevice[sha512($rdk)]['datetime'] = date('Y-m-d H:i:s');
         $user->setOptions('registerDevice', $registerDevice);
         $user->save();
@@ -113,19 +115,20 @@ if (isset($queryparam['id'])) {
         $cookieTimeout = time() + 365 * 24 * 3600;
         header("refresh: 2; url=$url");
         setcookie('sess_id', $sessionid, $cookieTimeout, "/", '', false, true);
-    	setcookie('registerDevice', $hashRegisteredDevice, $cookieTimeout, "/", '', false, true);
+        setcookie('registerDevice', $hashRegisteredDevice, $cookieTimeout, "/", '', false, true);
         setcookie('jeedom_token', ajax::getToken(), $cookieTimeout, "/", '', false, true);
 
         echo getHTML();
     }
     die();
-}
-else {
+} else {
     echo getErrorHTML("Missing ID");
-	die();
+    die();
 }
 
-function getErrorHTML($error) {
+
+function getErrorHTML($error)
+{
     $html  = '';
     $html .= '<br><br><br><center>';
     $html .= '<img src="../../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
@@ -136,11 +139,11 @@ function getErrorHTML($error) {
     $html .= '</span><br><br>';
     $html .= '<span style="font-family: Verdana, Helvetica, sans-serif;font-weight: normal;font-size: 15px;">Check plugin configuration</span>';
     $html .= '</center><br>';
-    log::add('autologin', 'error', $error);
     return $html;
 }
 
-function getHTML() {
+function getHTML()
+{
     $html  = '';
     $html .= '<br><br><br><center>';
     $html .= '<img src="../../../../core/img/logo-jeedom-grand-nom-couleur.svg" width="200"><br><br><br><br>';
