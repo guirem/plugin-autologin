@@ -7,7 +7,7 @@
 	"hasOwnDeamon" : false,
 	"hasDependency" : false,
 	"maxDependancyInstallTime" : 0,
-	"version" : "1.1",
+	"version" : "1.2",
 	"require" : "3.0",
     "category" : "programming",
     "changelog" : "https://github.com/guirem/plugin-autologin/blob/develop/docs/fr_FR/changelog.md",
@@ -18,5 +18,5 @@
 		"video" : ""
 	},
 	"languages" : ["fr_FR","en_US"],
-	"compatibility" : ["Jeedomboard","Smart","RPI/RPI2","Docker","DIY","mobile"]
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","v4"]
 }

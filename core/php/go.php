@@ -42,11 +42,19 @@ if (isset($queryparam['id'])) {
         die();
     }
 
-    $scheme = 'http://';
-    if (isset($_SERVER['HTTPS']) && 'on' === $_SERVER['HTTPS']) {
-        $scheme = 'https://';
+    $scheme = 'http';
+    if(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+        $scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'];
+    }elseif (isset($_SERVER['HTTPS']) && 'on' === $_SERVER['HTTPS']) {
+        $scheme = 'https';
     }
-    $url = $scheme . $_SERVER['HTTP_HOST'] . '/' .$autologin->getRedirectUrl();
+
+    $host = $_SERVER['HTTP_HOST'];
+    if(isset($_SERVER['HTTP_X_FORWARDED_HOST'])){
+        $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+    } 
+
+    $url = $scheme . '://' . $host . '/' .$autologin->getRedirectUrl();
     $allowedIP = $autologin->getIP();
     $user = $autologin->getUser();
     $hashRegisteredDevice = $autologin->getHash();
