@@ -18,6 +18,7 @@
 
 /* * ***************************Includes********************************* */
 
+require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 //error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
@@ -46,8 +47,8 @@ class autologin extends eqLogic {
         if ( $this->getConfiguration('ip', '') == '' ) {
             throw new Exception(__('Le champs IP ne peut etre vide.', __FILE__));
         }
-        if ( !filter_var($this->getConfiguration('ip', ''), FILTER_VALIDATE_IP) ) {
-            throw new Exception(__('Le champs IP n\'est pas au bon format.', __FILE__));
+        if ( !filter_var(scenarioExpression::setTags($this->getConfiguration('ip', '')), FILTER_VALIDATE_IP)) {
+            throw new Exception(__('Le champs IP n\'est pas au bon format. '.scenarioExpression::setTags($this->getConfiguration('ip', '')).'', __FILE__));
         }
         if ( $this->getConfiguration('user', '') == '' ) {
             throw new Exception(__('Le champs Utilisateur ne peut etre vide.', __FILE__));

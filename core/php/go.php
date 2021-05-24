@@ -55,7 +55,7 @@ if (isset($queryparam['id'])) {
     } 
 
     $url = $scheme . '://' . $host . '/' .$autologin->getRedirectUrl();
-    $allowedIP = $autologin->getIP();
+    $allowedIP = scenarioExpression::setTags($autologin->getIP());
     $user = $autologin->getUser();
     $hashRegisteredDevice = $autologin->getHash();
     $hashregisterdevice = $autologin->getHash();
