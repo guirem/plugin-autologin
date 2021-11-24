@@ -37,7 +37,10 @@ La configuration des sessions Autologin est accessible à partir du menu *Plugin
 
 Liste des paramêtres :
 
-- IP autorisée : L'IP à partir duquel l'équipement devra se connecter
+- IP autorisée à partir duquel l'équipement devra se connecter: 
+  - Adresse IP (ex: 127.0.0.1)
+  - Hostname
+  - Variable (ex: variable(ip))
 - Utilisateur : Choisir un utilisateur non admin (il est nécessaire d'avoir créé un utilisateur non admin au préalable)
 - Page Jeedom : La page Jeedom de redirection une fois l'autologin effectué (sans le *http[s]://jeedom/*).    
 Exemple : "*index.php*" ou "*index.php?v=d&p=plan&plan_id=1*"
