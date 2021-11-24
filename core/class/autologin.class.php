@@ -47,8 +47,8 @@ class autologin extends eqLogic {
         if ( $this->getConfiguration('ip', '') == '' ) {
             throw new Exception(__('Le champs IP ne peut etre vide.', __FILE__));
         }
-        if ( !filter_var(scenarioExpression::setTags($this->getConfiguration('ip', '')), FILTER_VALIDATE_IP)) {
-            throw new Exception(__('Le champs IP n\'est pas au bon format. '.scenarioExpression::setTags($this->getConfiguration('ip', '')).'', __FILE__));
+        if ( !filter_var(scenarioExpression::setTags(gethostbyname($this->getConfiguration('ip', ''))), FILTER_VALIDATE_IP)) {
+            throw new Exception(__('Le champs IP n\'est pas au bon format. '.scenarioExpression::setTags(gethostbyname($this->getConfiguration('ip', ''))).'', __FILE__));
         }
         if ( $this->getConfiguration('user', '') == '' ) {
             throw new Exception(__('Le champs Utilisateur ne peut etre vide.', __FILE__));
